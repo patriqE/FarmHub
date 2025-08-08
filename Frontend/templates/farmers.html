@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registered Farmers</title>
+  </head>
+  <body>
+    <h1>Registered Farmers</h1>
+    <table border="1">
+      <tr>
+        <th>Name</th>
+        <th>Phone Number</th>
+        <th>Farm Address</th>
+        <th>Utility Bill Path</th>
+      </tr>
+      {% for farmer in farmers %}
+      <tr>
+        <td>{{ farmer['name'] }}</td>
+        <td>{{ farmer['phone_number'] }}</td>
+        <td>{{ farmer['farm_address'] }}</td>
+        <td>{{ farmer['utility_bill_path'] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <a href="/">Back to Home</a>
+  </body>
+</html>

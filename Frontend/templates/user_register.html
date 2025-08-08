@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Registration</title>
+    <script>
+      function toggleFields() {
+        var userType = document.getElementById("user_type").value;
+        document.getElementById("buyer_fields").style.display =
+          userType === "buyer" ? "block" : "none";
+        document.getElementById("business_fields").style.display =
+          userType === "business" ? "block" : "none";
+      }
+    </script>
+  </head>
+  <body onload="toggleFields()">
+    <h1>User Registration</h1>
+    <form method="post">
+      <label>Username:</label><br />
+      <input type="text" name="username" required /><br />
+      <label>Password:</label><br />
+      <input type="password" name="password" required /><br />
+      <label>Re-enter Password:</label><br />
+      <input type="password" name="confirm_password" required /><br />
+      <label>User Type:</label><br />
+      <select
+        name="user_type"
+        id="user_type"
+        onchange="toggleFields()"
+        required
+      >
+        <option value="buyer">Buyer</option>
+        <option value="business">Business</option></select
+      ><br /><br />
+      <div id="buyer_fields">
+        <label>Full Name:</label><br />
+        <input type="text" name="full_name" /><br />
+        <label>Email:</label><br />
+        <input type="email" name="email" /><br />
+      </div>
+      <div id="business_fields">
+        <label>Business Name:</label><br />
+        <input type="text" name="business_name" /><br />
+        <label>Business Email:</label><br />
+        <input type="email" name="business_email" /><br />
+      </div>
+      <br />
+      <input type="submit" value="Register" />
+    </form>
+    <a href="/login">Already have an account? Login</a>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+    <script>
+      // Hide/show fields on page load and user type change
+      toggleFields();
+    </script>
+  </body>
+</html>

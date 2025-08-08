@@ -1,5 +1,5 @@
-from registration_service import RegistrationService
-from user_authentication import UserAuthentication
+from Backend.registration_service import RegistrationService
+from Backend.services.user_authentication import UserAuthentication
 
 if __name__ == "__main__":
     user_authentication = UserAuthentication()

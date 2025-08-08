@@ -1,5 +1,5 @@
 import mysql.connector
-from farmer import Farmer
+from backend.models.farmer import Farmer
 
 class DatabaseService:
     JDBC_URL = "localhost"
@@ -27,7 +27,8 @@ class DatabaseService:
                 cursor.close()
                 connection.close()
 
-    def fetch_farmers(self):
+    def fetch_farmers_list(self):
+        farmers = []
         try:
             connection = mysql.connector.connect(
                 host=self.JDBC_URL,
@@ -36,12 +37,18 @@ class DatabaseService:
                 database=self.DATABASE
             )
             cursor = connection.cursor()
-            cursor.execute("SELECT * FROM farmers")
-            for (id, name, phone_number, farm_address, utility_bill_path) in cursor:
-                print(f"ID: {id}, Name: {name}, PHONE NUMBER: {phone_number}, FARM ADDRESS: {farm_address}, UTILITY BILL PATH: {utility_bill_path}")
+            cursor.execute("SELECT name, phone_number, farm_address, utility_bill_path FROM farmers")
+            for (name, phone_number, farm_address, utility_bill_path) in cursor:
+                farmers.append({
+                    "name": name,
+                    "phone_number": phone_number,
+                    "farm_address": farm_address,
+                    "utility_bill_path": utility_bill_path
+                })
         except mysql.connector.Error as e:
             print("Error fetching farmers:", e)
         finally:
             if connection.is_connected():
                 cursor.close()
                 connection.close()
+        return farmers
