@@ -1,0 +1,8 @@
+flask
+requests
+fastapi
+uvicorn
+passlib
+bcrypt
+pyjwt
+mysql-connector-python
